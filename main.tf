@@ -285,7 +285,7 @@ locals {
 }
 resource "local_file" "private_key" {
     sensitive_content  = tls_private_key.ssh_server.private_key_pem
-    filename = "${path.module}/${local.cluster_name}.pem"
+    filename = "${abspath(pathexpand(var.kubeconfig_dir))}/${local.cluster_name}.pem"
     file_permission = "0400"
 }
 resource "null_resource" "download_kubeconfig_file" {
